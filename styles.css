@@ -1,0 +1,25 @@
+body {
+  background-color: rgba(13, 104, 25, 0.6)
+}
+
+#container {
+  border: black solid 1px;
+  height: 600px;
+  width: 600px;
+  margin: auto;
+  position: relative;
+  top: 100px;
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+
+}
+
+#container div {
+  border: black solid 1px;
+  flex-basis: 33.3333333333333%;
+  box-sizing: border-box;
+}
+
+
+
