@@ -1,8 +1,8 @@
 const Gameboard = (() => {
   let array = [];
 
-  const pushItemsToArray = (i, item) => {
-    array[i] = item;
+  const pushItemsToArray = (item) => {
+    array.push(item);
   }
 
   const getArray = () => array;
@@ -46,13 +46,8 @@ function getContainer() {
 
 
 
-const addMarks = (e, mark) => {
-  for(let i = 0; i < getContainer().children.length; i++) {  
-      if(i == e.target.id) {
-        Gameboard.pushItemsToArray(i, mark);
-      }
-  }
-
+const addMarks = (mark) => {
+        Gameboard.pushItemsToArray(mark); 
 }
 
 
@@ -62,13 +57,11 @@ const addMarks = (e, mark) => {
 
 const render = () => {
   for(let i = 0; i < Gameboard.getArray().length; i++) {
-      if(i == getContainer().children[i].id && Gameboard.getArray()[i] != undefined) {
+     {
             getContainer().children[i].innerHTML = Gameboard.getArray()[i];
-      }
-  }
 }
  
-
+  }}
 
 
 
@@ -121,16 +114,8 @@ const DisplayController = (() => {
   const player1 = Player('x', 'Ema');
   const player2 = Player('o', 'marc');
 
-  const playX = (e) => {
-    addMarks(e, player1.getPlayerSymbol())
-    render();
-    console.log(Gameboard.getArray());
-
-  };
-  
-
-  const playO = (b) => {
-    addMarks(b, player2.getPlayerSymbol())
+  const play = (player) => {
+    addMarks(player.getPlayerSymbol())
     render();
     console.log(Gameboard.getArray());
 
@@ -138,21 +123,25 @@ const DisplayController = (() => {
   
 
 
+  
+  
   const game = () => {
+
+   document.getElementById('container').addEventListener('click', () => {
     let ATurn = true;
-    getContainer().addEventListener('click', function(e) {
+
     if(ATurn) {
-      playX(e);
+      play(player1);
     }
     else {
-      playO(b);
+      play(player2);
     }
+  
+  ATurn = !ATurn;
+   
 
-  ATurn != ATurn;
-  })
-
-}
-
+})
+  }
   
 
 
