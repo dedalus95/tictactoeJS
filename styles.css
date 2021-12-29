@@ -4,8 +4,8 @@ body {
 
 #container {
   border: black solid 1px;
-  height: 600px;
-  width: 600px;
+  height: 400px;
+  width: 400px;
   margin: auto;
   position: relative;
   top: 100px;
@@ -19,6 +19,10 @@ body {
   border: black solid 1px;
   flex-basis: 33.3333333333333%;
   box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 90px;
 }
 
 
