@@ -168,7 +168,7 @@ const DisplayController = (() => {
 
   const play = (e, player) => {
     addMarks(e, player.getPlayerSymbol())
-    setTimeout(render, 1000);
+    render();
   };
 
 
