@@ -106,11 +106,11 @@ const WinningRegion = (() => {
   }
 
   const declare = (player) => {
-    if (declareWinner(player.getPlayerSymbol()))  {
+    if (declareWinner(player.getPlayerSymbol())) {
       getEm('show-result').textContent = player.getPlayerName() + " won!";
       return true;
-    } 
-    else if(!Gameboard.getArray().includes(undefined) && Gameboard.getArray().length === 9) {
+    }
+    else if (!Gameboard.getArray().includes(undefined) && Gameboard.getArray().length === 9) {
       getEm('show-result').textContent = "It's a draw!";
       return true;
     }
@@ -132,7 +132,7 @@ const restartGame = (func) => {
 
   getEm('yesBtn').addEventListener('click', () => {
     Gameboard.setArray([]);
-    for(let q = 0; q < getEm('container').children.length; q++) {
+    for (let q = 0; q < getEm('container').children.length; q++) {
       getEm('container').children[q].textContent = '';
       game();
     }
@@ -168,28 +168,24 @@ const DisplayController = (() => {
   const game = () => {
     let ATurn = true;
 
-    
+
     getEm('container').addEventListener('click', function handle(e) {
-      if(e.target.textContent == '') {
-      if (ATurn) {
-        play(e, player1);
+      if (e.target.textContent == '') {
+        if (ATurn) {
+          play(e, player1);
+        }
+
+        else {
+          play(e, player2);
+        }
+
+        ATurn = !ATurn;
       }
 
-      else {
-        play(e, player2);
-      }
 
-      ATurn = !ATurn;
-    }
-  
-
-    if (WinningRegion.declare(player1) || WinningRegion.declare(player2)) {
-
-    
+      if (WinningRegion.declare(player1) || WinningRegion.declare(player2)) {
         restartGame(handle)
-  }
-
-
+      }
 
     })
   }
@@ -198,9 +194,9 @@ const DisplayController = (() => {
     game
 
   }
-    
+
 })();
-  
+
 DisplayController.game();
 
 
