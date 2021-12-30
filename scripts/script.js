@@ -125,19 +125,26 @@ const WinningRegion = (() => {
 
 //------------------------------------------------------------------
 
-const restartGame = (func) => {
-  Gameboard.setArray([]);
+const restartGame = (func, func1) => {
   getEm('container').removeEventListener('click', func);
   getEm('restart-div').classList.remove('invisible');
 
-  getEm('yesBtn').addEventListener('click', () => {
+  const funcc = () => {
     Gameboard.setArray([]);
     for (let q = 0; q < getEm('container').children.length; q++) {
       getEm('container').children[q].textContent = '';
-      game();
+      func1();
     }
     getEm('show-result').textContent = '';
     getEm('restart-div').classList.add('invisible');
+
+  }
+
+  getEm('yesBtn').addEventListener('click', () => {
+    funcc();
+  })
+  getEm('yesBtn').addEventListener('touchstart', () => {
+    funcc();
   })
 }
 
@@ -168,8 +175,7 @@ const DisplayController = (() => {
   const game = () => {
     let ATurn = true;
 
-
-    getEm('container').addEventListener('click', function handle(e) {
+    const switchTurnsAndDeclareWinner = (e) => {
       if (e.target.textContent == '') {
         if (ATurn) {
           play(e, player1);
@@ -184,11 +190,22 @@ const DisplayController = (() => {
 
 
       if (WinningRegion.declare(player1) || WinningRegion.declare(player2)) {
-        restartGame(handle)
+        restartGame(switchTurnsAndDeclareWinner, game);
+        ATurn = true;
       }
+    }
 
+
+    getEm('container').addEventListener('click', function (e) {
+      switchTurnsAndDeclareWinner(e);
+    })
+
+    getEm('container').addEventListener('touchstart', function (e) {
+      switchTurnsAndDeclareWinner(e);
     })
   }
+
+  
 
   return {
     game
