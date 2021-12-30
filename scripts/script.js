@@ -135,7 +135,6 @@ const restartGame = (func, func1) => {
       getEm('container').children[q].textContent = '';
       func1();
     }
-    getEm('show-result').textContent = '';
     getEm('restart-div').classList.add('invisible');
 
   }
