@@ -168,7 +168,7 @@ const DisplayController = (() => {
 
   const play = (e, player) => {
     addMarks(e, player.getPlayerSymbol())
-    render();
+    setTimeout(render, 1000);
   };
 
 
@@ -190,19 +190,26 @@ const DisplayController = (() => {
       }
 
 
-      if (setTimeout(WinningRegion.declare(player1), 1000) || setTimeout(WinningRegion.declare(player2), 1000)) {
-        setTimeout(restartGame(switchTurnsAndDeclareWinner, game), 2000);
+      if (setTimeout(function() {
+              WinningRegion.declare(player1);
+          }, 1000)
+             || 
+          setTimeout(function() {
+            WinningRegion.declare(player2);
+          }, 1000)) {
+
+        restartGame(switchTurnsAndDeclareWinner, game);
         ATurn = true;
+        
       }
     }
 
 
     getEm('container').addEventListener('click', function (e) {
-      setTimeout(switchTurnsAndDeclareWinner(e), 1000);
+      switchTurnsAndDeclareWinner(e);
     })
-
     getEm('container').addEventListener('touchend', function (e) {
-      setTimeout(switchTurnsAndDeclareWinner(e), 1000);
+      switchTurnsAndDeclareWinner(e);
     })
   }
 
