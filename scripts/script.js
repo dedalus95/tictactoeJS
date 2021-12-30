@@ -111,7 +111,7 @@ const WinningRegion = (() => {
       return true;
     }
     else if (!Gameboard.getArray().includes(undefined) && Gameboard.getArray().length === 9) {
-      getEm('show-result').textContent = "It's a draw!";
+      getEm('restart-div').children[0].textContent = "It's a draw!";
       return true;
     }
 
@@ -190,11 +190,7 @@ const DisplayController = (() => {
         ||
         WinningRegion.declare(player2)
       ) { 
-        
-        setTimeout(() => {
           restartGame(switchTurnsAndDeclareWinner, game);
-        }, 400);
-        
         ATurn = true;
       }
     }
