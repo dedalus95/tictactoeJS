@@ -3,6 +3,8 @@ const Gameboard = (() => {
 
   const pushItemsToArray = (i, item) => {
     array[i] = item;
+    console.log('pushItemsToArray');
+
   }
 
   const getArray = () => array;
@@ -15,10 +17,7 @@ const Gameboard = (() => {
   }
 })();
 
-
-
 //------------------------------------------------------------------
-
 
 const Player = (symbol, name) => {
   let playerSymbol = symbol;
@@ -34,56 +33,44 @@ const Player = (symbol, name) => {
   }
 };
 
-
 //------------------------------------------------------------------
-
-
 
 function getEm(id) {
   const em = document.getElementById(id);
+  console.log('getEm');
   return em;
+
 }
 
-
 //------------------------------------------------------------------
-
-
 
 const addMarks = (e, mark) => {
   for (let i = 0; i < getEm('container').children.length; i++) {
     if (i == e.target.id) {
       Gameboard.pushItemsToArray(i, mark);
+      console.log('addMarks');
+
     }
   }
 
 }
 
-
 //------------------------------------------------------------------
-
-
-
 
 const render = () => {
   for (let i = 0; i < Gameboard.getArray().length; i++) {
     if (i == getEm('container').children[i].id && Gameboard.getArray()[i] != undefined) {
       getEm('container').children[i].innerHTML = Gameboard.getArray()[i];
-      console.log('is rendered')
+      console.log('render');
     }
   }
 }
 
-
 //------------------------------------------------------------------
-
 
 const WinningRegion = (() => {
 
-  const winningCombinations = () => {
-    const winCombos = [[0, 1, 2], [0, 4, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [2, 4, 6], [3, 4, 5], [6, 7, 8]]
-
-    return winCombos;
-  }
+  const winCombos = [[0, 1, 2], [0, 4, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [2, 4, 6], [3, 4, 5], [6, 7, 8]]
 
   const checkWinner = (mark) => {
     let tempArr = [];
@@ -93,59 +80,50 @@ const WinningRegion = (() => {
         tempArr.push(i);
       }
     })
+    console.log('checkWinner');
 
     return tempArr;
   }
 
-  const declareWinner = (mark) => {
-    for (let i = 0; i < winningCombinations().length; i++) {
-      if (winningCombinations()[i].every(wC => checkWinner(mark).includes(wC))) {
+  const declareWinner = (player) => {
+    for (let i = 0; i < winCombos.length; i++) {
+      if (winCombos[i].every(wC => checkWinner(player.getPlayerSymbol()).includes(wC))) {
+        console.log('declareWinner');
+        getEm('restart-div').children[0].textContent = player.getPlayerName() + " won! Would you have another try?";
         return true;
       }
     }
-  }
-
-  const declare = (player) => {
-    if (declareWinner(player.getPlayerSymbol())) {
-      getEm('restart-div').children[0].textContent = player.getPlayerName() + " won! Would you have another try?";
-      return true;
-    }
-    else if (!Gameboard.getArray().includes(undefined) && Gameboard.getArray().length === 9) {
+    if (!Gameboard.getArray().includes(undefined) && Gameboard.getArray().length === 9) {
       getEm('restart-div').children[0].textContent = "It's a draw! Would you have another try?";
       return true;
     }
-
   }
 
+
   return {
-    declare
+    declareWinner
   }
 
 })();
 
 //------------------------------------------------------------------
 
-const restartGame = (func, func1) => {
-  getEm('container').removeEventListener('click', func);
-  getEm('restart-div').classList.remove('invisible');
-
-  const funcc = () => {
-    Gameboard.setArray([]);
-    for (let q = 0; q < getEm('container').children.length; q++) {
-      getEm('container').children[q].textContent = '';
-      func1();
-    }
-    getEm('restart-div').classList.add('invisible');
-
+const funcc = () => {
+  Gameboard.setArray([]);
+  getEm('restart-div').classList.add('invisible');
+  for (let q = 0; q < getEm('container').children.length; q++) {
+    getEm('container').children[q].textContent = '';
+    console.log('restartGame');
   }
-
-  getEm('yesBtn').addEventListener('click', funcc);
- 
 }
 
 
-//------------------------------------------------------------------
+const restartGame = () => {
+  getEm('restart-div').classList.remove('invisible');
+  getEm('yesBtn').addEventListener('click', funcc);
+}
 
+//------------------------------------------------------------------
 
 const DisplayController = (() => {
   const p1Name = localStorage.getItem('p1Name');
@@ -157,62 +135,57 @@ const DisplayController = (() => {
 
   const player1 = Player(p1Symbol, p1Name);
   const player2 = Player(p2Symbol, p2Name);
-  getEm('info').textContent = player1.getPlayerName() + ' plays first.'
+  getEm('info').textContent = player1.getPlayerName() + ' plays first.';
 
 
 
   const play = (e, player) => {
     addMarks(e, player.getPlayerSymbol())
     render();
+    console.log('play');
   };
 
 
 
-  const game = () => {
-    let ATurn = true;
+  let ATurn = true;
 
-    const switchTurnsAndDeclareWinner = (e) => {
-      if (e.target.textContent == '') {
-        if (ATurn) {
-          play(e, player1);
-        }
-
-        else {
-          play(e, player2);
-        }
-
-        ATurn = !ATurn;
+  const switchTurns = (e) => {
+    if (e.target.textContent == '') {
+      if (ATurn) {
+        play(e, player1);
       }
 
-
-      if (
-        WinningRegion.declare(player1)
-        ||
-        WinningRegion.declare(player2)
-      ) { 
-        setTimeout(() => {
-          restartGame(switchTurnsAndDeclareWinner, game);
-        }, 400)
-        ATurn = true;
+      else {
+        play(e, player2);
       }
+
+      ATurn = !ATurn;
     }
 
+    if (
+      WinningRegion.declareWinner(player1)
+      ||
+      WinningRegion.declareWinner(player2)
+    ) {
+      setTimeout(() => {
+        restartGame();
+      }, 400);
 
-    getEm('container').addEventListener('click', function (e) {
-      switchTurnsAndDeclareWinner(e);
-    })
+      ATurn = true;
+    }
   }
 
 
-
   return {
-    game
-
+    switchTurns
   }
 
 })();
 
-DisplayController.game();
+getEm('container').addEventListener('click', function (e) {
+  DisplayController.switchTurns(e);
+});
+
 
 
 
