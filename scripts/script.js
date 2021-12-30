@@ -190,16 +190,17 @@ const DisplayController = (() => {
       }
 
 
-      if (setTimeout(function() {
-              WinningRegion.declare(player1);
-          }, 1000)
-             || 
-          setTimeout(function() {
-            WinningRegion.declare(player2);
-          }, 1000)) {
+      if (
+          WinningRegion.declare(player1) 
+          || 
+          WinningRegion.declare(player2)  
+          ) {
 
-        restartGame(switchTurnsAndDeclareWinner, game);
-        ATurn = true;
+            setTimeout(() => {
+              restartGame(switchTurnsAndDeclareWinner, game);
+            }, 2000);
+        
+            ATurn = true;
         
       }
     }
