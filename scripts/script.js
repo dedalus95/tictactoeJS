@@ -141,10 +141,11 @@ const restartGame = (func, func1) => {
   }
 
   getEm('yesBtn').addEventListener('click', () => {
-    funcc();
+    setTimeout(funcc, 2000)
+    
   })
   getEm('yesBtn').addEventListener('touchstart', () => {
-    funcc();
+    setTimeout(funcc, 2000)
   })
 }
 
