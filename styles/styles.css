@@ -69,18 +69,6 @@ justify-content: center;
 }
 
 
-#show-result {
-  min-width: 300px;
-  min-height: 100px;
-  width: min-content;
-  text-align: center;
-  margin: 60px auto auto auto;
-  border: black solid 5px;
-  border-radius: 10px;
-  font-size: 40px;
-  background-color: rgba(13, 104, 25, 0.6);
-}
-
  button {
   width: 100px;
   align-self: center;
@@ -116,12 +104,6 @@ visibility: hidden;
     font-size: 30px;
   }
 
-  #show-result {
-    margin: 25px auto auto auto;
-    font-size: 20px;
-    min-width: 50px;
-    min-height: 20px;
-  }
 
   #restart-div h1 {
     position: relative;

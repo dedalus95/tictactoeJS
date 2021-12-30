@@ -174,6 +174,7 @@ const DisplayController = (() => {
 
 
   const game = () => {
+    getEm('info').textContent = player1.getPlayerName() + ' plays first'
     let ATurn = true;
 
     const switchTurnsAndDeclareWinner = (e) => {
