@@ -163,6 +163,7 @@ const DisplayController = (() => {
 
   const player1 = Player(p1Symbol, p1Name);
   const player2 = Player(p2Symbol, p2Name);
+  getEm('info').textContent = player1.getPlayerName() + ' plays first.'
 
 
 
@@ -174,7 +175,6 @@ const DisplayController = (() => {
 
 
   const game = () => {
-    getEm('info').textContent = player1.getPlayerName() + ' plays first'
     let ATurn = true;
 
     const switchTurnsAndDeclareWinner = (e) => {
