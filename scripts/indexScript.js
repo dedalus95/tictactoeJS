@@ -16,4 +16,4 @@ function store() {
 
 
 document.getElementById('submitBtn').addEventListener('click', store);
-document.getElementById('submitBtn').addEventListener('touchstart', store);
+document.getElementById('submitBtn').addEventListener('touchend', store);

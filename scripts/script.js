@@ -141,11 +141,11 @@ const restartGame = (func, func1) => {
   }
 
   getEm('yesBtn').addEventListener('click', () => {
-    setTimeout(funcc, 2000)
+    setTimeout(funcc, 1000)
     
   })
-  getEm('yesBtn').addEventListener('touchstart', () => {
-    setTimeout(funcc, 2000)
+  getEm('yesBtn').addEventListener('touchend', () => {
+    setTimeout(funcc, 1000)
   })
 }
 
@@ -191,7 +191,7 @@ const DisplayController = (() => {
 
 
       if (WinningRegion.declare(player1) || WinningRegion.declare(player2)) {
-        restartGame(switchTurnsAndDeclareWinner, game);
+        setTimeout(restartGame(switchTurnsAndDeclareWinner, game), 2000);
         ATurn = true;
       }
     }
@@ -201,7 +201,7 @@ const DisplayController = (() => {
       switchTurnsAndDeclareWinner(e);
     })
 
-    getEm('container').addEventListener('touchstart', function (e) {
+    getEm('container').addEventListener('touchend', function (e) {
       switchTurnsAndDeclareWinner(e);
     })
   }
