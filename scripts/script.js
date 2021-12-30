@@ -108,7 +108,7 @@ const WinningRegion = (() => {
 
 //------------------------------------------------------------------
 
-const funcc = () => {
+const refreshGameboard = () => {
   Gameboard.setArray([]);
   getEm('restart-div').classList.add('invisible');
   for (let q = 0; q < getEm('container').children.length; q++) {
@@ -120,7 +120,7 @@ const funcc = () => {
 
 const restartGame = () => {
   getEm('restart-div').classList.remove('invisible');
-  getEm('yesBtn').addEventListener('click', funcc);
+  getEm('yesBtn').addEventListener('click', refreshGameboard);
 }
 
 //------------------------------------------------------------------
