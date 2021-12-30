@@ -198,11 +198,11 @@ const DisplayController = (() => {
 
 
     getEm('container').addEventListener('click', function (e) {
-      switchTurnsAndDeclareWinner(e);
+      setTimeout(switchTurnsAndDeclareWinner(e), 1000);
     })
 
     getEm('container').addEventListener('touchend', function (e) {
-      switchTurnsAndDeclareWinner(e);
+      setTimeout(switchTurnsAndDeclareWinner(e), 1000);
     })
   }
 
