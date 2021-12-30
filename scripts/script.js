@@ -140,9 +140,7 @@ const restartGame = (func, func1) => {
   }
 
   getEm('yesBtn').addEventListener('click', funcc);
-  getEm('yesBtn').addEventListener('touchend', () => {
-    setTimeout(funcc, 1000)
-  })
+ 
 }
 
 
@@ -204,11 +202,6 @@ const DisplayController = (() => {
 
     getEm('container').addEventListener('click', function (e) {
       switchTurnsAndDeclareWinner(e);
-    })
-    getEm('container').addEventListener('touchend', function (e) {
-
-        switchTurnsAndDeclareWinner(e);
-      
     })
   }
 
