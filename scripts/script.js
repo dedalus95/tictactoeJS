@@ -111,7 +111,7 @@ const WinningRegion = (() => {
       return true;
     }
     else if (!Gameboard.getArray().includes(undefined) && Gameboard.getArray().length === 9) {
-      getEm('restart-div').children[0].textContent = "It's a draw!";
+      getEm('restart-div').children[0].textContent = "It's a draw! Would you have another try?";
       return true;
     }
 
