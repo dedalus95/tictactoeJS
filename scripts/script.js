@@ -190,7 +190,7 @@ const DisplayController = (() => {
       }
 
 
-      if (WinningRegion.declare(player1) || WinningRegion.declare(player2)) {
+      if (setTimeout(WinningRegion.declare(player1), 1000) || setTimeout(WinningRegion.declare(player2), 1000)) {
         setTimeout(restartGame(switchTurnsAndDeclareWinner, game), 2000);
         ATurn = true;
       }
