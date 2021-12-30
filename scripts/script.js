@@ -107,7 +107,7 @@ const WinningRegion = (() => {
 
   const declare = (player) => {
     if (declareWinner(player.getPlayerSymbol())) {
-      getEm('show-result').textContent = player.getPlayerName() + " won!";
+      getEm('restart-div').children[0].textContent = player.getPlayerName() + " won! Would you have another try?";
       return true;
     }
     else if (!Gameboard.getArray().includes(undefined) && Gameboard.getArray().length === 9) {
