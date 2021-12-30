@@ -1,0 +1,40 @@
+@import url("styles.css");
+
+* {
+  font-weight:700;
+}
+
+
+
+h1 {
+
+  margin-bottom: 80px;
+}
+
+
+
+#form-container, form {
+  display: flex;
+  justify-content: center;
+  border: none;
+}
+
+form {
+  width: 500px;
+  flex-direction: column;
+}
+
+button {
+  background-color: rgba(13, 104, 25, 0.6) !important;
+
+}
+
+@media screen and (max-width: 720px) {
+  form {
+    width: 300px;
+  }
+  
+  input {
+    margin-bottom: 20px;
+  }
+}

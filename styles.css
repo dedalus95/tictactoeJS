@@ -1,29 +1,143 @@
 body {
-  background-color: rgba(13, 104, 25, 0.6)
+  background-color: rgba(13, 104, 25, 0.6);
+  font-family: 'Orbitron';
 }
 
-#container {
-  border: black solid 1px;
+#header-div {
+  margin-bottom: 20px;
+  border-bottom: black solid 1px;
+}
+
+
+p {
+  text-align: center;
+}
+
+h1 {
+text-align: center;
+}
+
+hr {
+  border: solid black 3px;
+}
+
+#container, #restart-div {
+  border: black solid 10px;
+  border-radius: 10px;
   height: 400px;
   width: 400px;
   margin: auto;
-  position: relative;
-  top: 100px;
   display: flex;
+}
+
+#container {
+
+  position: relative;
+  top: 20px;
   justify-content: space-evenly;
   flex-wrap: wrap;
 
 }
 
+#restart-div{
+background-color: black;
+position: relative;
+margin-top: -400px;
+color: rgb(109,164,116);
+flex-direction: column;
+justify-content: center;
+}
+
+#button-div {
+  align-self: center;
+}
+
+
+
+
 #container div {
-  border: black solid 1px;
-  flex-basis: 33.3333333333333%;
+  border: black solid 5px;
+  border-radius: 10px;
+  width: 133px;
+  height: 133px;
   box-sizing: border-box;
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 90px;
+  background-color: rgba(13, 104, 25, 0.6);
+}
+
+
+#show-result {
+  min-width: 300px;
+  min-height: 100px;
+  width: min-content;
+  text-align: center;
+  margin: 60px auto auto auto;
+  border: black solid 5px;
+  border-radius: 10px;
+  font-size: 40px;
+  background-color: rgba(13, 104, 25, 0.6);
+}
+
+ button {
+  width: 100px;
+  align-self: center;
+  color: black !important;
+  background-color: rgb(109,164,116);
+  outline: none;
+  border: 1px solid white;
+  border-radius: 3px;
+}
+
+.invisible {
+visibility: hidden;
 }
 
 
 
+@media screen and (max-width: 720px) {
+
+
+  #container, #restart-div {
+    width: 200px;
+    height: 200px;
+  }
+
+  #restart-div {
+    margin-top: -200px;
+    font-size: 10px;
+  }
+
+  #container div {
+    width: 66px;
+    height: 66px;
+    font-size: 30px;
+  }
+
+  #show-result {
+    margin: 25px auto auto auto;
+    font-size: 20px;
+    min-width: 50px;
+    min-height: 20px;
+  }
+
+  #restart-div h1 {
+    position: relative;
+    bottom: 40px;
+  }
+
+  #button-div {   
+  display: flex; 
+ }
+
+ #button-div button{   
+  width: 50px;
+  margin: 10px;
+}
+
+
+
+
+}
