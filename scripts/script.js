@@ -93,7 +93,7 @@ const WinningRegion = (() => {
         return true;
       }
     }
-    if (!Gameboard.getArray().includes(undefined) && Gameboard.getArray().length === 9) {
+     if (!Gameboard.getArray().includes(undefined) && Gameboard.getArray().length === 9) {
       getEm('restart-div').children[0].textContent = "It's a draw! Would you have another try?";
       return true;
     }
@@ -108,19 +108,23 @@ const WinningRegion = (() => {
 
 //------------------------------------------------------------------
 
-const funcc = () => {
-  Gameboard.setArray([]);
-  getEm('restart-div').classList.add('invisible');
-  for (let q = 0; q < getEm('container').children.length; q++) {
-    getEm('container').children[q].textContent = '';
-    console.log('restartGame');
-  }
-}
-
-
-const restartGame = () => {
+const restartGame = (func, func1) => {
+  getEm('container').removeEventListener('click', func);
   getEm('restart-div').classList.remove('invisible');
+
+  const funcc = () => {
+    Gameboard.setArray([]);
+    for (let q = 0; q < getEm('container').children.length; q++) {
+      getEm('container').children[q].textContent = '';
+      console.log('restartGame');
+    }
+    getEm('restart-div').classList.add('invisible');
+    func1();
+
+  }
+
   getEm('yesBtn').addEventListener('click', funcc);
+
 }
 
 //------------------------------------------------------------------
@@ -147,45 +151,56 @@ const DisplayController = (() => {
 
 
 
-  let ATurn = true;
+  const game = () => {
+    let ATurn = true;
 
-  const switchTurns = (e) => {
-    if (e.target.textContent == '') {
-      if (ATurn) {
-        play(e, player1);
+    const switchTurnsAndDeclareWinner = (e) => {
+      if (e.target.textContent == '') {
+        if (ATurn) {
+          play(e, player1);
+          console.log('switchTurnsAndDeclareWinner');
+
+        }
+
+        else {
+          play(e, player2);
+          console.log('switchTurnsAndDeclareWinner');
+
+        }
+
+        ATurn = !ATurn;
       }
 
-      else {
-        play(e, player2);
-      }
-
-      ATurn = !ATurn;
     }
 
+    const gioca = () => {
     if (
       WinningRegion.declareWinner(player1)
       ||
       WinningRegion.declareWinner(player2)
     ) {
       setTimeout(() => {
-        restartGame();
-      }, 400);
-
+        restartGame(switchTurnsAndDeclareWinner, game);
+      }, 400)
       ATurn = true;
     }
   }
 
+    getEm('container').addEventListener('click', function (e) {
+      switchTurnsAndDeclareWinner(e);
+    })
+  }
 
   return {
-    switchTurns
+    game
+
   }
 
 })();
 
-getEm('container').addEventListener('click', function (e) {
-  DisplayController.switchTurns(e);
-});
+window.addEventListener('dblclick', 
 
+DisplayController.game);
 
 
 
