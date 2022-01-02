@@ -185,9 +185,3 @@ const DisplayController = (() => {
 getEm('container').addEventListener('click', function (e) {
   DisplayController.switchTurns(e);
 });
-
-
-
-
-
-
